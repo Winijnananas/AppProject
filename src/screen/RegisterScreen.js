@@ -157,9 +157,10 @@ export default function RegisterScreen({ navigation }) {
 
 
 
-    
-   
-   const API_Regis = "http://192.168.1.31:3000/users"
+    //wifi wu
+    const API_Regis ="http://172.20.10.5:3000/users"
+    //wigi หอ
+  //  const API_Regis = "http://192.168.1.31:3000/users"
 // const API_Regis = process.env.API_REGIS;
     // const API = "http://127.0.0.1:3000/users";
     const register = () => {

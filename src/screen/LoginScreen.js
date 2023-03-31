@@ -10,11 +10,14 @@ import axios from 'axios';
 // dotenv.config();
 
 // const navigation = useNavigation()
-//const API_login = "http://192.168.1.31:3000/login";
+console.disableYellowBox = true;
 
 const LoginScreen = ({ navigation }) => {
   //const API_login = "http://192.168.1.31:3000/login";
-  const API_login = "http://192.168.1.31:3000/login";
+  //wifi wu
+  const API_login ="http://172.20.10.5:3000/login"
+  //wifi หอ
+  // const API_login = "http://192.168.1.31:3000/login";
 // const API_login = process.env.API_LOGIN;
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');

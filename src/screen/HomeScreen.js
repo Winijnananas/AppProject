@@ -6,6 +6,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createStackNavigator } from '@react-navigation/stack';
 import styles from '../../css/styletwo';
 import axios from 'axios';
+import data from 'react-native-ico-material-design/src/data';
+import DatePicker from "react-datepicker";
+
 const HomeScreen = ({ navigation }) => {
     const [roundNumber, setRoundNumber] = useState('');
     const [cost, setCost] = useState('');
@@ -14,48 +17,50 @@ const HomeScreen = ({ navigation }) => {
     const [status, setStatus] = useState();
     const pickerRef = useRef();
 
-
-
-
-    const API_Invest = "http://192.168.1.31:3000/investments"
-// const API_Regis = process.env.API_REGIS;
+    console.disableYellowBox = true;
+    const [startDate, setStartDate] = useState(new Date());
+    //wifiหอ
+    // const API_Invest = "http://192.168.1.31:3000/investments"
+    //wifi wu
+    const API_Invest = "http://172.20.10.5:3000/investments"
+    // const API_Regis = process.env.API_REGIS;
     // const API = "http://127.0.0.1:3000/users";
-    const InpurInvest = () => {
-        if( !roundNumber || !cost || !investment || !type || !status ) {
-          alert('Complete your information');
-          return;
+    const InputInvest = () => {
+        if (!roundNumber || !cost || !investment || !type || !status) {
+            alert('Complete your information');
+            return;
         }
-    
+
         //axios.post(`${MYAPP_API}}/users`,
         axios.post(API_Invest,
-       
-        {
-          roundNumber:roundNumber,
-          cost:cost,
-          investment:investment,
-          type:type,
-          status:status
-         
 
-        })
-        .then((response) => {
-          if(response.data.status === 'Done Submit Data') {
-            // navigation.navigate('Login');
-          }
-        })
-        .catch((error) => {
-          console.log('Can not submit',error.message);
-        })
-      }
-  return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+            {
+                roundNumber: roundNumber,
+                cost: cost,
+                investment: investment,
+                type: type,
+                status: status
+
+
+            })
+            .then((response) => {
+                if (response.data.status === 'Done Submit Data') {
+                    // navigation.navigate('Login');
+                }
+            })
+            .catch((error) => {
+                console.log('Can not submit', error.message);
+            })
+    }
+    return (
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <View
                 style={styles.container}
                 behavior="padding"
             >
 
-                
-                    
+
+
                 <View style={{ display: 'flex', justifyContent: 'flex-start', height: '100%' }}>
                     <Text style={styles.titlefirst}>กรอกสิ่งที่ต้องการลงทุน</Text>
                     {/* <Text style={{ color: 'red', fontWeight: '700', fontSize: 15, textAlign: 'left', marginLeft: 5 }}>เงินที่เหลือจากการลงทุน</Text>
@@ -83,7 +88,7 @@ const HomeScreen = ({ navigation }) => {
                                 keyboardType="numeric"
                             />
 
-                          
+
                             <TextInput
                                 style={styles.textInputHome}
                                 placeholder="เงินลงทุน"
@@ -105,25 +110,7 @@ const HomeScreen = ({ navigation }) => {
 
                         />
 
-                        {/* <TextInput
-                            style={styles.textInputHome}
-                            onChangeText={setPassword}
-                            keyboardType='numeric'
-                            value={price}
-                            placeholderTextColor="#A9A9A9"
-                            // secureTextEntry={true}
-                            autoCapitalize='none'
-                            placeholder="จำนวนเงิน"
-                            clearButtonMode="always"
 
-                        /> */}
-                        {/* <Text style={{
-                        textAlign: 'center',
-                        justifyContent: 'center',
-                        fontSize: 15,
-                        fontWeight: "800",
-                        color: "#606A74",
-                    }}>เลือกประเภทการลงทุน</Text> */}
                         <TextInput
                             style={{
                                 height: 40,
@@ -189,8 +176,10 @@ const HomeScreen = ({ navigation }) => {
                             <Picker.Item label="ระบุสถานะ" value="ระบุสถานะ" />
                             <Picker.Item label="Active" value="active" />
                             <Picker.Item label="Unactive" value="unactive" />
-                            
+
                         </Picker>
+                        {/* <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} /> */}
+                       
 
 
 
@@ -200,13 +189,14 @@ const HomeScreen = ({ navigation }) => {
                             //  onPress={() =>navigation.navigate('Tab')}
 
                             onPress={() => {
-                                InpurInvest();
+                                InputInvest();
                                 setCost('');
                                 setInvestment('');
                                 setType('');
                                 setRoundNumber('');
                                 setStatus('');
                                 Alert.alert("บันทึกข้อมูลลงในฐานข้อมูลเเล้ว");
+
                             }}
 
                         >
@@ -217,14 +207,14 @@ const HomeScreen = ({ navigation }) => {
                         </TouchableOpacity>
 
 
-                       
+
 
                     </View>
                 </View>
             </View>
         </TouchableWithoutFeedback>
- 
-  )
+
+    )
 }
 
 export default HomeScreen
