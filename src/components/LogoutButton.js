@@ -49,7 +49,7 @@ export default function LogoutButton() {
 
 const styles = StyleSheet.create({
   card: {
-    marginTop:350,
+    marginTop:200,
     width:200,
     borderRadius: 7,
     paddingHorizontal: 10,

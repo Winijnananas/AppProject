@@ -1,5 +1,5 @@
 import { View, Text, Button, TextInput, StyleSheet, SafeAreaView, TouchableOpacity, Image, ImageBackground, Pressable, ScrollView, ActivityIndicator, Alert } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+
 import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
@@ -8,6 +8,8 @@ import { useIsFocused } from '@react-navigation/native';
 import LogoutButton from '../components/LogoutButton';
 import axios from 'axios';
 import DisplayInvest from './DisplayInvest';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+
 console.disableYellowBox = true;
 
 
@@ -64,18 +66,53 @@ export default function UserScreen({ navigation }) {
 
 
   return (
-    <View style={{justifyContent:'center',flex:1,alignItems:'center'}}>
-       <Text style={{fontSize:50,fontWeight:'bold',marginBottom:200}}>UserScreen</Text>
-      <Text style={{fontSize:20,fontWeight:'500',color:'blue'}}>{`สวัสดีคุณ : ${user.fname}`}</Text>
+    <View style={{justifyContent:'center',flex:1,alignItems:'center',paddingTop:50}}>
+       <Text style={{fontSize:40,fontWeight:'bold',marginBottom:20,color:'#D93D04'}}>หน้าผู้ใช้งาน</Text>
+       <View style={{marginBottom:100}}>
+       <Image source={{ uri: user.urluser }} style={styles.avatar}/>
+       </View>
+      
+      <Text style={{fontSize:20,fontWeight:'500',color:'blue'}}>{`สวัสดีคุณ : ${user.fname.toUpperCase()}`}</Text>
       <Text style={{fontSize:15,fontWeight:'600',color:'black'}}>{`อีเมลล์  : ${user.email}`}</Text>
-    <TouchableOpacity
-    style={{backgroundColor:'#4FB8FE',height:35,width:'95%',alignItems:'center',borderRadius:7,marginTop:5}}
+      <TouchableOpacity
+    style={{backgroundColor:'#0059E9',height:35,width:'95%',alignItems:'center',borderRadius:0,marginTop:5}}
     onPress={() => { navigation.navigate('Show') }}
     >
       <Text style={{fontSize:20,color:"#FFF",fontWeight:'800',padding:5}}>
       ดูประวัติการลงทุน
       </Text>
     </TouchableOpacity>
+      <TouchableOpacity style={styles.buttonContainer}
+              onPress={() => Alert.alert('During develop')}
+              >
+              <MaterialCommunityIcons name="heart" color={'red'} size={25}
+              style={{marginLeft:10}} 
+              />
+              <Text style={{marginLeft:5}}>Favorite</Text> 
+              </TouchableOpacity> 
+
+
+              <TouchableOpacity style={styles.buttonContainer}
+              onPress={() => Alert.alert('During develop')}
+              >
+              <MaterialCommunityIcons name="cog" color={'red'} size={25}
+              style={{marginLeft:10}} 
+              />
+              <Text style={{marginLeft:5}}>Setting</Text> 
+              </TouchableOpacity>   
+
+
+              <TouchableOpacity style={styles.buttonContainer}
+              onPress={() => Alert.alert('During develop')}
+              //onPress={() =>navigation.navigate('Favorite')}
+              >
+              <MaterialCommunityIcons name="alert-circle-outline" color={'grey'} size={25}
+              style={{marginLeft:10}} 
+              />
+              <Text style={{marginLeft:5}}>App V.1.0.0</Text> 
+              </TouchableOpacity>   
+              
+    
 
 
       <TouchableOpacity style={styles.loginBtn}>
@@ -197,6 +234,28 @@ const styles = StyleSheet.create({
     marginBottom: 0,
     width: '109%',
     borderRadius: 5,
+    backgroundColor: "#3333",
+  },
+  avatar: {
+    width: 100,
+    height: 100,
+    borderRadius: 63,
+    borderWidth: 4,
+    borderColor: "white",
+    alignSelf:'center',
+    position: 'absolute',
+    
+  },
+  buttonContainer: {
+    padding:10,
+    marginTop:4,
+    height:45,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    marginBottom:0,
+    width:'95%',
+    borderRadius:7,
     backgroundColor: "#3333",
   },
 });

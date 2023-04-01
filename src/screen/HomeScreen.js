@@ -48,7 +48,7 @@ const HomeScreen = ({ navigation }) => {
             Alert.alert("บันทึกข้อมูลลงในฐานข้อมูลเเล้ว");
             return;
         }
-        alert('มีข้อมูลอยู่เเล้ว');
+        
         //axios.post(`${MYAPP_API}}/users`,
         axios.post(API_Invest,
 
