@@ -7,8 +7,7 @@ import { useNavigation } from '@react-navigation/native'
 import { useIsFocused } from '@react-navigation/native';
 import LogoutButton from '../components/LogoutButton';
 import axios from 'axios';
-
-
+import DisplayInvest from './DisplayInvest';
 console.disableYellowBox = true;
 
 
@@ -21,8 +20,8 @@ export default function UserScreen({ navigation }) {
 
   const [shown, show] = React.useState(false);
   const onPress = () => show(!shown);
-  // const API_User_me = "http://172.20.10.5:3000/users/:id";
-  const API_ENDPOINT = "http://172.20.10.5:3000/user";
+  const API_ENDPOINT = "http://192.168.1.31:3000/user";
+  // const API_ENDPOINT = "http://172.20.10.5:3000/user";
   const [isLoading, setIsLoading] = useState(false);
   const [token, setToken] = useState();
   const [user, setUser] = useState();
@@ -67,9 +66,16 @@ export default function UserScreen({ navigation }) {
   return (
     <View style={{justifyContent:'center',flex:1,alignItems:'center'}}>
        <Text style={{fontSize:50,fontWeight:'bold',marginBottom:200}}>UserScreen</Text>
-      <Text style={{fontSize:20,fontWeight:'500',color:'blue'}}>{`HELLO ! : ${user.fname}`}</Text>
-      <Text style={{fontSize:15,fontWeight:'600',color:'black'}}>{`Email : ${user.email}`}</Text>
-  
+      <Text style={{fontSize:20,fontWeight:'500',color:'blue'}}>{`สวัสดีคุณ : ${user.fname}`}</Text>
+      <Text style={{fontSize:15,fontWeight:'600',color:'black'}}>{`อีเมลล์  : ${user.email}`}</Text>
+    <TouchableOpacity
+    style={{backgroundColor:'#4FB8FE',height:35,width:'95%',alignItems:'center',borderRadius:7,marginTop:5}}
+    onPress={() => { navigation.navigate('Show') }}
+    >
+      <Text style={{fontSize:20,color:"#FFF",fontWeight:'800',padding:5}}>
+      ดูประวัติการลงทุน
+      </Text>
+    </TouchableOpacity>
 
 
       <TouchableOpacity style={styles.loginBtn}>

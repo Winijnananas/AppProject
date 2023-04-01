@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#1B1B1B",
+    backgroundColor: "#FFF",
     width: "100%",
     height: "100%",
     paddingHorizontal: 10,
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     marginTop: 250,
     marginBottom: 10,
     fontWeight: "800",
-    color: "#fff",
+    color: "#D93D04",
   },
   settingTitle: {
     fontSize: 35,
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     borderWidth: 0.15,
     borderRadius: 5,
     padding: 10,
-    backgroundColor: "#F25C05",
+    backgroundColor: "#007ACC",
     width: "100%",
     alignItems: "center",
     color: "white",

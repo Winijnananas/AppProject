@@ -7,6 +7,8 @@ import RegisterScreen from '../screen/RegisterScreen';
 import ButtomTab from '../navigations/ButtomTab';
 import HomeScreen from '../screen/HomeScreen';
 import UserScreen from '../screen/UserScreen';
+import DisplayInvest from '../screen/DisplayInvest';
+import DetailScreen from '../screen/DetailScreen';
 const Stack = createStackNavigator();
 const index = () => {
     return (
@@ -17,6 +19,8 @@ const index = () => {
             <Stack.Screen name="Tab" component={ButtomTab} />
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="User" component={UserScreen} />
+            <Stack.Screen name="Show" component={DisplayInvest} />
+            <Stack.Screen name="Detail" component={DetailScreen} />
         </Stack.Navigator>
     )
 }

@@ -1,4 +1,4 @@
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, Keyboard, TouchableOpacity, TouchableWithoutFeedback, View, ScrollView, SafeAreaView, Image, Alert, Dimensions, Button, FlatList, Pressable } from 'react-native'
+import { KeyboardAvoidingView, StyleSheet, Text, TextInput, Keyboard, Modal, TouchableOpacity, TouchableWithoutFeedback, View, ScrollView, SafeAreaView, Image, Alert, Dimensions, Button, FlatList, Pressable } from 'react-native'
 import { useNavigation } from '@react-navigation/core'
 import React, { useEffect, useState, useRef } from 'react'
 import { Picker } from '@react-native-picker/picker';
@@ -6,10 +6,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createStackNavigator } from '@react-navigation/stack';
 import styles from '../../css/styletwo';
 import axios from 'axios';
-import data from 'react-native-ico-material-design/src/data';
-import DatePicker from "react-datepicker";
+import DatePicker from 'react-native-modern-datepicker';
+import { getToday, getFormatedDate } from 'react-native-modern-datepicker';
+
+// import "react-datepicker/dist/react-datepicker.css";
 
 const HomeScreen = ({ navigation }) => {
+
     const [roundNumber, setRoundNumber] = useState('');
     const [cost, setCost] = useState('');
     const [investment, setInvestment] = React.useState('');
@@ -18,19 +21,34 @@ const HomeScreen = ({ navigation }) => {
     const pickerRef = useRef();
 
     console.disableYellowBox = true;
-    const [startDate, setStartDate] = useState(new Date());
+
+    const today = new Date();
+    const startDate = getFormatedDate(today.setDate(today.getDate() +1), 'DD/MM/YYYY')
+    // const endDate = getFormatedDate(today.getDate() + 7, 'DD/MM/YYYY');
+    const [open, setOpen] = useState(false)
+    const [date, setDate] = useState('')
+
+    function handleOnPress() {
+        setOpen(!open);
+    }
+    function handleChange(newDate) {
+        console.log(newDate)
+        setDate(newDate)
+    }
     //wifiหอ
-    // const API_Invest = "http://192.168.1.31:3000/investments"
+    const API_Invest = "http://192.168.1.31:3000/investments"
     //wifi wu
-    const API_Invest = "http://172.20.10.5:3000/investments"
+    // const API_Invest = "http://172.20.10.5:3000/investments"
     // const API_Regis = process.env.API_REGIS;
     // const API = "http://127.0.0.1:3000/users";
     const InputInvest = () => {
-        if (!roundNumber || !cost || !investment || !type || !status) {
+        
+        if (!roundNumber || !cost || !investment || !type || !status || !date) {
             alert('Complete your information');
+            Alert.alert("บันทึกข้อมูลลงในฐานข้อมูลเเล้ว");
             return;
         }
-
+        alert('มีข้อมูลอยู่เเล้ว');
         //axios.post(`${MYAPP_API}}/users`,
         axios.post(API_Invest,
 
@@ -39,7 +57,8 @@ const HomeScreen = ({ navigation }) => {
                 cost: cost,
                 investment: investment,
                 type: type,
-                status: status
+                status: status,
+                date: date.toString().substring(0, 10),
 
 
             })
@@ -51,7 +70,12 @@ const HomeScreen = ({ navigation }) => {
             .catch((error) => {
                 console.log('Can not submit', error.message);
             })
-    }
+    };
+
+
+
+
+
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <View
@@ -148,7 +172,7 @@ const HomeScreen = ({ navigation }) => {
                             selectedValue={type}
                             onValueChange={(itemValue, itemIndex) =>
                                 setType(itemValue)}
-                            style={{ marginTop: 10 }}
+                                style={{ marginTop: 10, fontSize: 18,color: '#D93D04' }}
                         >
                             <Picker.Item label="ไม่มีประเภท" value="none" />
                             <Picker.Item label="เกษตรกรรม" value="เกษตรกรรม" />
@@ -171,7 +195,7 @@ const HomeScreen = ({ navigation }) => {
                             selectedValue={status}
                             onValueChange={(itemValue, itemIndex) =>
                                 setStatus(itemValue)}
-                            style={{ marginTop: 10 }}
+                                style={{ marginTop: 10, fontSize: 18,color: '#2E9AE9'}}
                         >
                             <Picker.Item label="ระบุสถานะ" value="ระบุสถานะ" />
                             <Picker.Item label="Active" value="active" />
@@ -179,7 +203,39 @@ const HomeScreen = ({ navigation }) => {
 
                         </Picker>
                         {/* <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} /> */}
-                       
+                        <TouchableOpacity
+                            onPress={handleOnPress}
+                        >
+                            <Text style={styles.OpenDate}>กำหนดวันเปิดรอบ</Text>
+                        </TouchableOpacity>
+                        <Modal
+                            animationType='slide'
+                            transparent={true}
+                            visible={open}
+                        >
+                            <View style={{ flex:1,justifyContent:'center',alignItems:'center',marginTop:22}}>
+                                <View style={{margin:20,backgroundColor:'#FFF',borderRadius:20,width:'90%',padding:35,alignItems:'center',shadowColor:'#000',shadowOffset:{width:0,height:2}}}>
+                                    <DatePicker
+                                    mode='calendar'
+                                    minimumDate={startDate}
+                                    // maximumDate={endDate}
+                                    selected={date}
+                                    onDateChange={handleChange}
+                                    />
+                                    <TouchableOpacity
+                                        onPress={handleOnPress}
+                                    >
+                                        <Text style={{fontSize:15,fontWeight:'bold',}}>ปิดหน้าต่างนี้</Text>
+                                    </TouchableOpacity>
+                                    {/* <TouchableOpacity
+                                        onPress={InputInvest}
+                                    >
+                                        <Text style={{fontSize:15,fontWeight:'bold',}}>บันทึกวัน</Text>
+                                    </TouchableOpacity> */}
+                                </View>
+                            </View>
+
+                        </Modal>
 
 
 
@@ -189,13 +245,14 @@ const HomeScreen = ({ navigation }) => {
                             //  onPress={() =>navigation.navigate('Tab')}
 
                             onPress={() => {
-                                InputInvest();
+                                InputInvest('');
                                 setCost('');
                                 setInvestment('');
                                 setType('');
                                 setRoundNumber('');
                                 setStatus('');
-                                Alert.alert("บันทึกข้อมูลลงในฐานข้อมูลเเล้ว");
+                                setDate('');
+                                
 
                             }}
 

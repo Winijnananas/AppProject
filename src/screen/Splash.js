@@ -1,5 +1,6 @@
 import { View, Text ,Image,StyleSheet} from 'react-native'
 import React ,{useEffect, useState}from 'react'
+import Logo from '../../css/logo';
 export default function Splash({navigation}) {
     useEffect(() => {
         setTimeout(() => {
@@ -10,7 +11,7 @@ export default function Splash({navigation}) {
   return (
     <View
       style={{ flex: 1, alignItems: 'center', justifyContent: 'center',backgroundColor:'#FFFF'}}>
-    <Text style={{fontSize:100,fontWeight:'bold'}}>WELCOME TO APP</Text>
+        <Logo/>
       {/* <Text style={{fontWeight:'bold',color:'#D93D04',fontSize:20}}>ACCOUNTING APP📈</Text> */}
   
     </View>

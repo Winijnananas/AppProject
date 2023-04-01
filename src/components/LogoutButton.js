@@ -42,7 +42,7 @@ export default function LogoutButton() {
   
   return(
     <TouchableOpacity style={styles.card} onPress={Logout}>
-      <Text style={styles.label}>LOGOUT</Text>
+      <Text style={styles.label}>ออกจากระบบ</Text>
     </TouchableOpacity>
   );
 }
@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
   label: {
     color: '#FFF',
     fontWeight: '800',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    fontSize:20
   }
 });

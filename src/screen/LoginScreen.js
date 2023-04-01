@@ -15,9 +15,9 @@ console.disableYellowBox = true;
 const LoginScreen = ({ navigation }) => {
   //const API_login = "http://192.168.1.31:3000/login";
   //wifi wu
-  const API_login ="http://172.20.10.5:3000/login"
+  // const API_login ="http://172.20.10.5:3000/login"
   //wifi หอ
-  // const API_login = "http://192.168.1.31:3000/login";
+  const API_login = "http://192.168.1.31:3000/login";
 // const API_login = process.env.API_LOGIN;
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -63,7 +63,7 @@ const LoginScreen = ({ navigation }) => {
 
       <View style={{ display: 'flex', justifyContent: 'flex-start', height: '100%' }}>
 
-        <Text style={styles.title}>SIGN IN</Text>
+        <Text style={styles.title}>เข้าสู่ระบบ</Text>
 
         <View>
 
@@ -74,7 +74,7 @@ const LoginScreen = ({ navigation }) => {
             value={email}
             placeholderTextColor="#A9A9A9"
             autoCapitalize='none'
-            placeholder="Username"
+            placeholder="อีเมลล์ผู้ใช้"
             clearButtonMode="always"
           />
 
@@ -87,7 +87,7 @@ const LoginScreen = ({ navigation }) => {
             // right={<TextInput.Icon icon="eye"/>}
             secureTextEntry={true}
             autoCapitalize='none'
-            placeholder="Password"
+            placeholder="รหัสผ่าน"
             clearButtonMode="always"
           />
 
@@ -100,15 +100,15 @@ const LoginScreen = ({ navigation }) => {
             <Text style={styles.buttonLabel}
             // onPress={login}
             // onPress={() => Alert.alert('Login Complete ')}
-            >LOGIN</Text>
+            >ล็อคอิน</Text>
           </TouchableOpacity>
 
           { /* register */}
           <TouchableOpacity style={{ marginVertical: 10, flexDirection: 'row' }}
             onPress={() => { navigation.navigate('Regis') }}
           >
-            <Text style={{ color: '#ffff' }}>New User?</Text>
-            <Text style={{ color: '#FFF', fontWeight: '700', textDecorationLine: 'underline', fontSize: 15, textAlign: 'left', marginLeft: 5 }}>Sign Up</Text>
+            <Text style={{ color: '#D93D04' }}>ผู้ใช้ใหม่?</Text>
+            <Text style={{ color: '#13678A', fontWeight: '700', textDecorationLine: 'underline', fontSize: 15, textAlign: 'left', marginLeft: 5 }}>ลงทะเบียน</Text>
           </TouchableOpacity>
         </View>
       </View>

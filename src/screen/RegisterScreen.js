@@ -201,11 +201,11 @@ export default function RegisterScreen({ navigation }) {
     >
        
             <View style={{display: 'flex', justifyContent: 'flex-start', height: '100%'}}> 
-            <Text style={{ fontSize: 30, fontWeight: 'bold', marginBottom: 10, marginTop: 80,right: 120,left:4 ,color:'white'}}>SIGN UP  </Text>
+            <Text style={{ fontSize: 30, fontWeight: 'bold', marginBottom: 10, marginTop: 80,right: 120,left:4 ,color:'#007ACC'}}>ลงทะเบียนเข้าสู่ระบบ  </Text>
             <View>
 
             <TextInput
-                placeholder='Email'
+                placeholder='อีเมลล์ที่ใช้สมัคร'
                 style={styles.textInput}
                 onChangeText={setEmail}
                 value={email}
@@ -213,7 +213,7 @@ export default function RegisterScreen({ navigation }) {
             />
             <TextInput
                 
-                placeholder='Fullname'
+                placeholder='ชื่อบัญชี'
                 style={styles.textInput}
                 onChangeText={SetfName}
                 value={fname}
@@ -223,7 +223,7 @@ export default function RegisterScreen({ navigation }) {
       
             <TextInput
                 secureTextEntry={true}
-                placeholder='Password'
+                placeholder='รหัสผ่าน'
                 style={styles.textInput}
                 onChangeText={setPassword}
                 value={password}
@@ -231,7 +231,7 @@ export default function RegisterScreen({ navigation }) {
             />
             <TextInput
                 secureTextEntry={true}
-                placeholder='ConfirmPassword'
+                placeholder='ยืนยันรหัสผ่าน'
                 style={styles.textInput}
                 onChangeText={setConfirm}
                 value={confirm}
@@ -239,14 +239,14 @@ export default function RegisterScreen({ navigation }) {
             />
             <TouchableOpacity style={styles.RegisBtn}
                 onPress={register}>
-                <Text style={styles.buttonLabel}>SUBMIT</Text>
+                <Text style={styles.buttonLabel}>ลงทะเบียน</Text>
             </TouchableOpacity>
             <TouchableOpacity style={{marginVertical: 10,flexDirection: 'row'}}
-            onPress={() => {navigation.navigate('Login')}}
-          >
-           <Text style={{color:'#ffff'}}>If already account ?</Text>
-           <Text style={{color: '#FFF', fontWeight: '700', fontSize: 15, textAlign: 'left',marginLeft:5,backgroundColor:'#1F9B5E'}}>Sign In</Text>
-          </TouchableOpacity>
+              onPress={() => {navigation.navigate('Login')}}
+            >
+             <Text style={{color:'black'}}>มีบัญชีอยู่เเล้ว ?</Text>
+             <Text style={{color: '#13678A', fontWeight: '700', fontSize: 15, textDecorationLine: 'underline',textAlign: 'left',marginLeft:5}}>เข้าสู่ระบบ</Text>
+            </TouchableOpacity>
             </View>
             </View>
        

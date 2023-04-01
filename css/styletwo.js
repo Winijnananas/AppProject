@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     color: "#D93D04",
   },
   titlefirst: {
-    paddingTop:120,
+    paddingTop:20,
     textAlign:'center',
     justifyContent: 'center',
     fontSize: 35,
@@ -145,7 +145,8 @@ const styles = StyleSheet.create({
         backgroundColor: "#1C6AE4",
         justifyContent:'center',
         alignContent:'center',
-        width:'100%'
+        width:'100%',
+        marginTop:50
       },
       containerfirst:{
         borderRadius:10,
@@ -172,7 +173,30 @@ const styles = StyleSheet.create({
     innerContainer:{
         alignItems:'center',
         flexDirection:'column',
+    },
+    conteredView:{
+      flex:1,
+      justifyContent:'center',
+      alignItems:'center',
+      marginTop:22
+    },
+    modalView:{
+      margin:20,
+      backgroundColor:'#FFF',
+      borderRadius:20,
+      width:'90%',
+      padding:35,
+      alignItems:'center',
+      shadowColor:'#000',
+      shadowOffset:{
+        width:0,
+        height:2,
+      },
+      
+    },OpenDate:{
+      fontSize:15,fontWeight:'bold',justifyContent:'center',alignContent:'center',textAlign:'center',padding:10,marginBottom:5,backgroundColor:'#FF6C37',borderRadius:5,color:'#FFF'
     }
+
 });
 
 module.exports = styles;
