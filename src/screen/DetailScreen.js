@@ -1,24 +1,40 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View,Image,TouchableOpacity,SafeAreaView} from 'react-native';
+import { StyleSheet, Text, View,Image,TouchableOpacity,SafeAreaView,ScrollView} from 'react-native';
 import axios from 'axios';
 import { useFocusEffect } from '@react-navigation/native';
-import {LineChart} from 'react-native-chart-kit';
+import {LineChart,BarChart} from 'react-native-chart-kit';
 import moment from 'moment';
 
 const DetailScreen = ({ route }) => {
   const API_Invest = 'http://192.168.1.31:3000/investments';
   const [investment, setInvestment] = useState(null);
-  const data = {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+  const [investmentData, setInvestmentData] = useState([]);
+  useEffect(() => {
+    fetch(API_Invest)
+      .then(response => response.json())
+      .then(data => setInvestmentData(data));
+  }, []);
+  // data: [0, 0, 0, 900, 1000, 5000],
+  const chartData = {
+    labels: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤคษภาคม', 'กรกฎาคม'],
     datasets: [
       {
-        data: [20, 45, 28, 80, 99, 43],
-        color: (opacity = 1) => `rgba(0, 0, 255, ${opacity})`, // optional
-        strokeWidth: 2 // optional
+        data: [0, 0, 0, 900, 1000, 5000],
+        // data: investmentData.map(item => item.amount),
+        color: (opacity = 1) => `rgba(0, 0, 255, ${opacity})`,
+        strokeWidth: 2
       }
     ]
   };
-  
+  const Bardata = {
+    labels: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤคษภาคม'],
+    datasets: [
+      {
+        data: [0, 0, 0, 900, 1000,],
+        color: (opacity = 1) => `rgba(0, 0, 255, ${opacity})`,
+      },
+    ],
+  };
   const chartConfig = {
     backgroundGradientFrom: '#fff',
     backgroundGradientTo: '#fff',
@@ -83,7 +99,7 @@ const DetailScreen = ({ route }) => {
   }
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Image source={{ uri: 'https://img.freepik.com/free-vector/investor-with-laptop-monitoring-growth-dividends-trader-sitting-stack-money-investing-capital-analyzing-profit-graphs-vector-illustration-finance-stock-trading-investment_74855-8432.jpg?w=2000' }} style={styles.poster} resizeMode="cover" />
       <View style ={styles.containerDetail}>
         
@@ -111,12 +127,26 @@ const DetailScreen = ({ route }) => {
     </Text>
     </View>
 
-    <View>
+    <View style={{marginBottom:10}}>
       <LineChart
-        data={data}
-        width={300}
+        data={chartData}
+        width={450}
         height={200}
         chartConfig={chartConfig}
+      />
+    </View>
+    <View style={styles.containerBar}>
+    <BarChart
+        data={Bardata}
+        width={400}
+        height={220}
+        chartConfig={{
+          
+          backgroundGradientFrom: '#FFFF',
+          backgroundGradientTo: '#ffff',
+          decimalPlaces: 0,
+          color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+        }}
       />
     </View>
 
@@ -128,13 +158,19 @@ const DetailScreen = ({ route }) => {
       <Text style={styles.buttonText}>add</Text>
     </TouchableOpacity>
     
-  </View>
+  </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  containerBar: {
+  padding:10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
   },
   containerDetail: {
     flex: 1,
